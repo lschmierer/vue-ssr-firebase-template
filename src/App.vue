@@ -1,22 +1,18 @@
 <template>
-  <img
-    alt="Vue logo"
-    src="./assets/logo.png"
-  >
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
+  <nav>
+    <router-link to="/">
+      Home
+    </router-link>|
+    <router-link to="/about">
+      About
+    </router-link>
+  </nav>
+  <router-view v-slot="{ Component }">
+    <Suspense>
+      <component :is="Component" />
+    </Suspense>
+  </router-view>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
-
-export default defineComponent({
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-})
-</script>
 
 <style>
 #app {
