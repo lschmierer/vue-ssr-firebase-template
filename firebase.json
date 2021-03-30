@@ -1,0 +1,19 @@
+{
+  "functions": {
+    "source": ".",
+    "predeploy": "npm run build:functions"
+  },
+  "hosting": {
+    "public": "dist/client",
+    "ignore": [
+      "dist/client/src"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "ssr"
+      }
+    ],
+    "predeploy": "npm run build:hosting"
+  }
+}

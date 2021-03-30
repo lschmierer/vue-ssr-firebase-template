@@ -1,8 +1,7 @@
 import { createApp } from './main'
 import { renderToString, SSRContext } from '@vue/server-renderer'
 
-export async function render (url: string, manifest: { [x: string]: string[] }):
-Promise<[string, string]> {
+export async function render (url: string, manifest: Record<string, string[]>): Promise<[string, string]> {
   const { app, router } = createApp()
 
   // set the router to the desired URL before rendering
@@ -23,8 +22,7 @@ Promise<[string, string]> {
   return [html, preloadLinks]
 }
 
-function renderPreloadLinks (
-  modules: string[], manifest: { [x: string]: string[] }): string {
+function renderPreloadLinks (modules: string[], manifest: Record<string, string[]>): string {
   let links = ''
   const seen = new Set()
   modules.forEach((id: string) => {
