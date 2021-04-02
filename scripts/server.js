@@ -8,9 +8,6 @@ async function createDevServer () {
 
   const app = express()
 
-  /**
-   * @type {import('vite').ViteDevServer}
-   */
   const vite = await require('vite').createServer({
     logLevel: 'info',
     server: {
@@ -25,15 +22,15 @@ async function createDevServer () {
       const url = req.originalUrl
 
       // always read fresh template in dev
-      let template = fs.readFileSync(resolve('../src/_index.html'), 'utf-8')
+      let template = fs.readFileSync(resolve('../index.html'), 'utf-8')
       template = await vite.transformIndexHtml(url, template)
-      const render = (await vite.ssrLoadModule('./src/ssr.ts')).render
+      const render = (await vite.ssrLoadModule('./src/server')).render
 
       const [appHtml, preloadLinks] = await render(url, {})
 
       const html = template
-        .replace('<!--preload-links-->', preloadLinks)
-        .replace(/[ \t\n\r]*<!--app-html-->[ \t\n\r]*/, appHtml)
+        .replace(/[ \n\r\t]*<!--preload-links-->[ \n\r\t]*/, preloadLinks)
+        .replace(/[ \n\r\t]*<!--app-html-->[ \n\r\t]*/, appHtml)
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
     } catch (e) {

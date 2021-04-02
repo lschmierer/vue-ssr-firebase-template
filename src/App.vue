@@ -1,16 +1,11 @@
 <template>
   <nav>
-    <router-link to="/">
-      Home
-    </router-link>|
-    <router-link to="/about">
-      About
-    </router-link>
+    <a href="/">Home</a>
+    |
+    <a href="/about">About</a>
   </nav>
   <router-view v-slot="{ Component }">
-    <Suspense>
-      <component :is="Component" />
-    </Suspense>
+    <component :is="Component" />
   </router-view>
 </template>
 

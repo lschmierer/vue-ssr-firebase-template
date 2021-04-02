@@ -2,7 +2,7 @@
   "name": "vue-ssr-demo",
   "version": "0.0.0",
   "scripts": {
-    "serve": "npm run build && firebase emulators:exec 'ts-node scripts/devServer' --only functions,hosting",
+    "serve": "npm run build && firebase emulators:exec 'ts-node scripts/server' --only functions,hosting",
     "build": "npm run build:hosting && npm run build:functions",
     "build:hosting": "vite build --ssrManifest --outDir dist/client",
     "build:functions": "vite build --ssr functions/index.ts --outDir dist/server",

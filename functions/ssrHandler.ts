@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from 'express'
 import compression from 'compression'
-import { render } from '../src/ssr'
-import template from '../dist/client/src/_index.html?raw'
+import { render } from '../src/server'
+import template from '../dist/client/index.html?raw'
 import manifest from '../dist/client/ssr-manifest.json'
 
 export async function createSSRHandler (): Promise<Express> {
@@ -13,8 +13,8 @@ export async function createSSRHandler (): Promise<Express> {
 
     render(url, manifest).then(([appHtml, preloadLinks]) => {
       const html = template
-        .replace('<!--preload-links-->', preloadLinks)
-        .replace(/[ \t\n\r]*<!--app-html-->[ \t\n\r]*/, appHtml)
+        .replace(/[ \n\r\t]*<!--preload-links-->[ \n\r\t]*/, preloadLinks)
+        .replace(/[ \n\r\t]*<!--app-html-->[ \n\r\t]*/, appHtml)
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
     }).catch((err) => {
