@@ -3,7 +3,9 @@
     alt="Vue logo"
     src="../assets/logo.png"
   >
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite + Firebase" />
+  <Suspense>
+    <HelloWorld msg="Hello Vue 3 + TypeScript + Vite + Firebase" />
+  </Suspense>
 </template>
 
 <script lang="ts">

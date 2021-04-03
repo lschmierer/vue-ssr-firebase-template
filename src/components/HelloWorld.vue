@@ -14,9 +14,9 @@
     >Vetur</a>
     or
     <a
-      href="https://github.com/johnsoncodehk/volar"
+      href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint"
       target="_blank"
-    >Volar</a>
+    >ESLint</a>
     (if using
     <code>&lt;script setup&gt;</code>)
   </p>
@@ -34,13 +34,13 @@
     >Vue 3 Docs</a>
   </p>
 
-  <button @click="count++">
+  <button @click="increment">
     count is: {{ count }}
   </button><br>
 
   (dynamic)<br>
   <Static>
-    <button @click="count++">
+    <button @click="increment">
       count is: {{ count }}
     </button><br>
     (static)
@@ -52,7 +52,9 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
+
+import { useStore } from '../store'
 
 import Static from '../client/Static.vue'
 
@@ -64,9 +66,15 @@ export default defineComponent({
       required: true
     }
   },
-  setup: () => {
-    const count = ref(0)
-    return { count }
+  async setup () {
+    const store = useStore()
+
+    await store.dispatch('counter/load')
+
+    return {
+      count: computed(() => store.state.counter.count),
+      increment: () => store.dispatch('counter/increment')
+    }
   }
 })
 </script>
