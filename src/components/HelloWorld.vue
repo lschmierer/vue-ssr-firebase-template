@@ -17,8 +17,6 @@
       href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint"
       target="_blank"
     >ESLint</a>
-    (if using
-    <code>&lt;script setup&gt;</code>)
   </p>
 
   <p>See <code>README.md</code> for more information.</p>
