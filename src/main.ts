@@ -4,7 +4,7 @@ import { Router } from 'vue-router'
 import FirestoreRepository from './repositories/FirestoreRepository'
 
 import { createRouter } from './router'
-import { createStore, key as storeKey } from './store'
+import { createStore } from './store'
 
 import App from './App.vue'
 
@@ -13,6 +13,6 @@ export function createApp (): {app: _App, router: Router} {
   const router = createRouter()
   const store = createStore(new FirestoreRepository())
   app.use(router)
-  app.use(store, storeKey)
+  app.use(store)
   return { app, router }
 }

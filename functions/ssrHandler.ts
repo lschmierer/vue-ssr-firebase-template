@@ -1,8 +1,8 @@
 import express, { Express, Request, Response } from 'express'
 import compression from 'compression'
-import { render } from '../src/server'
 import template from '../dist/client/index.html?raw'
 import manifest from '../dist/client/ssr-manifest.json'
+import { render } from '../src/server'
 
 export async function createSSRHandler (): Promise<Express> {
   const app = express()
