@@ -28,8 +28,18 @@ jobs:
         with:
           node-version: 14.x
       - run: npm ci
-      - uses: mattallty/jest-github-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npm run test:unit
+  coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.5
         with:
-          test-command: "npm run test:unit"
+          node-version: 14.x
+      - run: npm ci
+      - uses: artiomtr/jest-coverage-report-action@v1.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          threshold: 80
